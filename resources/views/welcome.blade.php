@@ -79,7 +79,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Theara Seng
+                    <a href="{{ route('home') }}">Go to home page</a>
                 </div>
 
                 <div class="links">
