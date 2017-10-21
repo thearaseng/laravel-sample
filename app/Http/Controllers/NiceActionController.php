@@ -11,6 +11,9 @@ class NiceActionController extends Controller {
     }
 
     public function postNiceAction(Request $request){
+        $this->validate($request, [
+            'username' => 'required|alpha'
+        ]);
         return view('handle-action', ['name' => $request['username'], 'action' => 'post action']);
     }
 

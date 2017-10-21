@@ -11,4 +11,13 @@
         <input type="submit" value="Do action">
         <input type="hidden" name="_token" value="{{ Session::token() }}">
     </form>
+    @if(count(@errors) > 0)
+        <div>
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection
