@@ -6,6 +6,6 @@
 @section('content')
     @include('layouts/header')
     <div>
-        <p>Hello {{ $name }}, with the action '{{ $action }}'</p>
+        <p>Hello {{ $name }}, with the action '{{ $action->name }}'</p>
     </div>
 @endsection

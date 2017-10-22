@@ -17,9 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', [
+    'uses' => 'HomeController@home',
+    'as' => 'home'
+]);
 
 
 
@@ -54,6 +55,11 @@ Route::group(['prefix' => 'do'], function(){
     Route::post('/', [
         'uses' => 'NiceActionController@postNiceAction',
         'as' => 'postNiceAction'
+    ]);
+
+    Route::get('/get/all/action-list', [
+        'uses' => 'NiceActionController@getAllNiceActions',
+        'as' => 'getAllNiceActions'
     ]);
 
 });
