@@ -1,0 +1,1 @@
+<h2>Thank you {{ $user_name }} for using our service!</h2>

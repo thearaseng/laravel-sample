@@ -22,6 +22,7 @@ class ActionCreated
     public function __construct($action)
     {
         $this->action = $action;
+        $this->email = 'seng.theara.kh@gmail.com';
     }
 
     /**
