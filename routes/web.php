@@ -66,3 +66,8 @@ Route::group(['prefix' => 'do'], function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//****************** Facebook Login **********************
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');

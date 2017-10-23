@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Laravel\Socialite\Facades\Socialite;
+use Mockery\Exception;
 
 class LoginController extends Controller
 {
@@ -35,5 +38,47 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    // ******* Facebook Login ********
+    /**
+     * Redirect the user to the Facebook authentication page.
+     *
+     * @return Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from Facebook.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        try{
+            $socialUser = Socialite::driver('facebook')->user();
+        }
+        catch (Exception $ex){
+            return redirect()->to('/');
+        }
+
+        $user = User::where('facebook_id', $socialUser->getId())->first();
+
+        if(!$user){
+            $user = User::create([
+                'facebook_id' => $socialUser->getId(),
+                'name' => $socialUser->name,
+                'email' => $socialUser->getEmail()
+            ]);
+        }
+
+        auth()->login($user);
+
+        return redirect()->to('/home');
+
     }
 }
