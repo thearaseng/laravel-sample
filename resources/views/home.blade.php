@@ -1,24 +1,23 @@
-@extends('layouts/master')
+@extends('layouts.app')
 
-@section('title')
-    Home Page
-@endsection
 @section('content')
-    @include('layouts/header')
-    <div>
-        <p>These are all logged actions</p>
-        <ul>
-            @foreach($logged_actions as $logged_action)
-                <li>
-                    Logged ID : {{ $logged_action->id }} with action {{ $logged_action->nice_action->name }}
-                    <ul>
-                        @foreach($logged_action->nice_action->categories as $category)
-                            <li>{{ $category->name }}</li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endforeach
-        </ul>
-        {!! $logged_actions->links() !!}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    You are logged in!
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 @endsection
