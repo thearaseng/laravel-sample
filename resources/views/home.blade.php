@@ -19,5 +19,6 @@
                 </li>
             @endforeach
         </ul>
+        {!! $logged_actions->links() !!}
     </div>
 @endsection

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActionCreated;
 use App\NiceAction;
 use App\NiceActionLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class NiceActionController extends Controller {
 
@@ -23,6 +25,9 @@ class NiceActionController extends Controller {
         $action->name = $request['name'];
         $action->niceness = 5;
         $action->save();
+
+        Event::fire(new ActionCreated($action));
+
         return redirect()->route('getAllNiceActions');
     }
 
